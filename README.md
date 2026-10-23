@@ -7,6 +7,10 @@
 
 [下载发布版本](https://github.com/181404010226/classic-swf-coop/releases) · [改造原理](docs/SWF-ADAPTER.md) · [验证记录](verification)
 
+[![扫码双人玩 · 演示片封面](docs/demo-cover.jpg)](https://github.com/181404010226/classic-swf-coop/releases/tag/v0.2.0)
+
+演示片含电脑双端实际联机录制与标注的手机外框/操作流程示意，中文旁白为 AI 合成。
+
 ## 使用
 
 - 房主运行电脑版或 Android 应用，创建双人房。
