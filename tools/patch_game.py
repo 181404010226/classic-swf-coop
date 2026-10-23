@@ -144,6 +144,3 @@ for cls in ['deadFire','WaterGirlStairs']:
 original=(root/'local'/'game.swf').read_bytes()
 (dst/'profile.json').write_text(json.dumps({'id':'rgm141','abi':'rgm141-lan/1','originalSha256':hashlib.sha256(original).hexdigest(),'patchedClasses':['Game','level','deadFire','WaterGirlStairs'],'frameMs':40,'physicsStep':1/26,'rng':'LCG32 1664525,1013904223','requires':['ExternalInterface','same patched SWF and Ruffle runtime'],'totalNodes':32},indent=2),'utf8')
 print(dst)
-
-
-

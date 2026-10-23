@@ -42,7 +42,7 @@ public class MainActivity extends Activity {
             setRequestedOrientation(play?android.content.pm.ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE:android.content.pm.ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
             if(Build.VERSION.SDK_INT>=30){WindowInsetsController controller=getWindow().getInsetsController();if(controller!=null){if(play){controller.hide(WindowInsets.Type.systemBars());controller.setSystemBarsBehavior(WindowInsetsController.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE);}else controller.show(WindowInsets.Type.systemBars());}}
         });}
-  
+
         @JavascriptInterface public void wifi(){runOnUiThread(()->{try{startActivity(new Intent(Settings.ACTION_WIFI_SETTINGS));}catch(Exception ignored){}});}
         @JavascriptInterface public void hotspot(){runOnUiThread(()->{try{Intent i=new Intent();i.setClassName("com.android.settings","com.android.settings.TetherSettings");startActivity(i);}catch(Exception e){startActivity(new Intent(Settings.ACTION_WIRELESS_SETTINGS));}});}
         @JavascriptInterface public void copy(String text){runOnUiThread(()->{((android.content.ClipboardManager)getSystemService(CLIPBOARD_SERVICE)).setPrimaryClip(ClipData.newPlainText("房间链接",text));Toast.makeText(MainActivity.this,"房间链接已复制",Toast.LENGTH_SHORT).show();});}

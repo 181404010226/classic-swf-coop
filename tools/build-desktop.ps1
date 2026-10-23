@@ -1,4 +1,4 @@
-param([string]$Jdk='D:\Java\MicrosoftJDK17')
+﻿param([string]$Jdk='D:\Java\MicrosoftJDK17')
 $ErrorActionPreference='Stop'
 $repoRoot=Split-Path $PSScriptRoot -Parent
 & "$repoRoot\app\test\run.ps1" -Jdk $Jdk

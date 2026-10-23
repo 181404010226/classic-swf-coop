@@ -18,10 +18,3 @@ const assert=require('node:assert/strict'),fs=require('fs'),path=require('path')
  await pages[0].screenshot({path:path.resolve(__dirname,'../build/matrix.png')});
  fs.writeFileSync(path.resolve(__dirname,'../build/determinism.json'),JSON.stringify({date:new Date().toISOString(),runtime:'Edge / Ruffle 0.7.1, two isolated browser contexts',results},null,2));await browser.close();
 })().catch(e=>{console.error(e);process.exit(1)});
-
-
-
-
-
-
-

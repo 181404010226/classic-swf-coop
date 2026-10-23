@@ -17,8 +17,7 @@ Third-party software:
   External build tool; fetched into ignored build cache, license preserved.
 - JSON-java 20240303: Public Domain; https://github.com/stleary/JSON-java
   External desktop test dependency. Android supplies org.json.
-- qr.js bundles node-qrcode: MIT, Copyright (c) 2012 Ryan Day, (c) 2015 SolarLiner,
-  (c) 2016-2017 Daniele Corti, (c) 2017-2019 Luciano Gabriel Bernacki.
+- qr.js bundles node-qrcode: MIT, Copyright (c) 2012 Ryan Day.
   https://github.com/soldair/node-qrcode. License in licenses/node-qrcode-MIT.txt.
 - Playwright: Apache-2.0; development/test dependency.
 

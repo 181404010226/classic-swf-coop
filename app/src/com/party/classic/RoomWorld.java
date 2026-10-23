@@ -57,4 +57,3 @@ public final class RoomWorld {
   JSONObject out=new JSONObject().put("frame",frame).put("node",node).put("seed",seed).put("resync",resync).put("commands",commands).put("type","state").put("phase",phase).put("paused",pause).put("pauseReason",reason).put("manualPause",manualPause).put("room",room).put("host",host(t)).put("me",me).put("role",me>=0?seats[me].role:0).put("solo",solo).put("epoch",epoch).put("players",people).put("inputs",new JSONArray(inputs)).put("engineStatus",engineStatus).put("revision",revision).put("time",System.currentTimeMillis());if(host(t))out.put("invite",invite);return out;
  }
 }
-

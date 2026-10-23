@@ -1,4 +1,4 @@
-param([string]$Jdk='D:\Java\MicrosoftJDK17')
+﻿param([string]$Jdk='D:\Java\MicrosoftJDK17')
 $ErrorActionPreference='Stop'
 $taskRoot=Split-Path $PSScriptRoot -Parent
 New-Item -ItemType Directory -Force -Path "$taskRoot\build\test-classes" | Out-Null
