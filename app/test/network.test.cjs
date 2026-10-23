@@ -1,4 +1,4 @@
-const {chromium}=require('../../node_modules/playwright'),assert=require('node:assert/strict'),fs=require('fs'),path=require('path');
+const {chromium}=require('playwright'),assert=require('node:assert/strict'),fs=require('fs'),path=require('path');
 let debugPages=[];const url=process.env.CLASSIC_URL||'http://127.0.0.1:17684',host=process.env.CLASSIC_HOST;
 if(!host)throw Error('Set CLASSIC_HOST to the room server host token');
 (async()=>{

@@ -1,26 +1,26 @@
 {
-  "date": "2026-10-23T02:45:34.307Z",
+  "date": "2026-10-23T04:45:29.292Z",
   "transport": "WebSocket ordered inputs, no video",
   "sameState": {
     "blue": 0,
     "bodies": null,
     "bodyCount": 20,
     "fire": [
-      3.5439580306452894,
-      26.700671968077675
+      3.6653175750520095,
+      26.705053219100343
     ],
-    "frame": 129,
+    "frame": 143,
     "green": 0,
-    "hash": "2927748441",
+    "hash": "823300959",
     "node": 1,
     "ok": true,
     "phase": "play",
     "red": 0,
-    "rng": "3159614404",
-    "timeMs": 5160,
+    "rng": "1334477571",
+    "timeMs": 5720,
     "water": [
-      2.7852560184148523,
-      22.700281177374542
+      2.986793429258028,
+      22.705000000022814
     ]
   },
   "reconnectReplay": true,
@@ -30,9 +30,9 @@
   "latency": {
     "metric": "DOM keydown to ordered input frame applied by local SWF; loopback PC; excludes display scanout and touch hardware",
     "samples": 24,
-    "p50": 26.700000047683716,
-    "p95": 46.299999952316284,
-    "max": 46.700000047683716
+    "p50": 26.5,
+    "p95": 45.10000002384186,
+    "max": 45.799999952316284
   },
   "errors": []
 }
