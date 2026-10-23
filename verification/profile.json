@@ -1,0 +1,19 @@
+{
+  "id": "rgm141",
+  "abi": "rgm141-lan/1",
+  "originalSha256": "b971248765587523e63e5264a2e9d00db3e595d9866b2d8c15a403d7dee2aa6b",
+  "patchedClasses": [
+    "Game",
+    "level",
+    "deadFire",
+    "WaterGirlStairs"
+  ],
+  "frameMs": 40,
+  "physicsStep": 0.038461538461538464,
+  "rng": "LCG32 1664525,1013904223",
+  "requires": [
+    "ExternalInterface",
+    "same patched SWF and Ruffle runtime"
+  ],
+  "totalNodes": 32
+}

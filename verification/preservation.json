@@ -1,0 +1,15 @@
+{
+  "originalSha256": "b971248765587523e63e5264a2e9d00db3e595d9866b2d8c15a403d7dee2aa6b",
+  "patchedSha256": "682d659c3687ec81f6294a4c3156b79f1a7a42ac5664eb8187cc7e8b2fec37c3",
+  "originalTagCount": 991,
+  "preservedNonAbcTags": 990,
+  "allNonAbcTagBytesIdentical": true,
+  "ffdecReserializedChanges": [
+    {
+      "index": 96,
+      "type": 82,
+      "old": 253667,
+      "new": 281132
+    }
+  ]
+}

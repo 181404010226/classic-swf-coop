@@ -1,0 +1,15 @@
+local/
+build/
+node_modules/
+app/build/
+app/lib/*.jar
+app/assets/game.swf
+app/assets/ruffle/
+*.keystore
+*.jks
+*.apk
+*.swf
+*.swf.zip
+.env
+.env.*
+__pycache__/

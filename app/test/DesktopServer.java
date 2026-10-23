@@ -1,0 +1,3 @@
+package com.party.classic;
+import java.nio.file.*;
+public class DesktopServer{public static void main(String[]args)throws Exception{Path root=Paths.get(args[0]);RoomServer server=new RoomServer(n->Files.readAllBytes(root.resolve(n)));String link="http://127.0.0.1:"+server.port()+"/#host="+server.world.hostToken;System.out.println("PORT="+server.port());System.out.println("HOST="+server.world.hostToken);System.out.println("OPEN="+link);System.out.println("LAN="+server.urls());if(args.length>1&&args[1].equals("--open"))java.awt.Desktop.getDesktop().browse(new java.net.URI(link));Thread.currentThread().join();}}
