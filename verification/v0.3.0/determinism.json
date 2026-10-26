@@ -1,0 +1,230 @@
+{
+  "date": "2026-10-26T00:54:13.246Z",
+  "runtime": "Edge / Ruffle 0.7.1, two isolated browser contexts",
+  "results": [
+    {
+      "node": 1,
+      "frames": 300,
+      "hash": "3310140038",
+      "phase": "play",
+      "bodyCount": 20
+    },
+    {
+      "node": 2,
+      "frames": 300,
+      "hash": "474041675",
+      "phase": "play",
+      "bodyCount": 30
+    },
+    {
+      "node": 3,
+      "frames": 300,
+      "hash": "2816652386",
+      "phase": "play",
+      "bodyCount": 28
+    },
+    {
+      "node": 4,
+      "frames": 300,
+      "hash": "3389839705",
+      "phase": "play",
+      "bodyCount": 25
+    },
+    {
+      "node": 5,
+      "frames": 300,
+      "hash": "1490013360",
+      "phase": "play",
+      "bodyCount": 28
+    },
+    {
+      "node": 6,
+      "frames": 300,
+      "hash": "2738825973",
+      "phase": "play",
+      "bodyCount": 22
+    },
+    {
+      "node": 7,
+      "frames": 300,
+      "hash": "2137093488",
+      "phase": "play",
+      "bodyCount": 20
+    },
+    {
+      "node": 8,
+      "frames": 300,
+      "hash": "29224336",
+      "phase": "play",
+      "bodyCount": 26
+    },
+    {
+      "node": 9,
+      "frames": 300,
+      "hash": "1312024440",
+      "phase": "play",
+      "bodyCount": 21
+    },
+    {
+      "node": 10,
+      "frames": 300,
+      "hash": "427344512",
+      "phase": "play",
+      "bodyCount": 22
+    },
+    {
+      "node": 11,
+      "frames": 300,
+      "hash": "3428703079",
+      "phase": "play",
+      "bodyCount": 13
+    },
+    {
+      "node": 12,
+      "frames": 300,
+      "hash": "2001618531",
+      "phase": "play",
+      "bodyCount": 29
+    },
+    {
+      "node": 13,
+      "frames": 300,
+      "hash": "208054847",
+      "phase": "play",
+      "bodyCount": 24
+    },
+    {
+      "node": 14,
+      "frames": 300,
+      "hash": "616976666",
+      "phase": "play",
+      "bodyCount": 25
+    },
+    {
+      "node": 15,
+      "frames": 300,
+      "hash": "803027667",
+      "phase": "play",
+      "bodyCount": 42
+    },
+    {
+      "node": 16,
+      "frames": 300,
+      "hash": "462831987",
+      "phase": "play",
+      "bodyCount": 22
+    },
+    {
+      "node": 17,
+      "frames": 300,
+      "hash": "600165822",
+      "phase": "play",
+      "bodyCount": 29
+    },
+    {
+      "node": 18,
+      "frames": 300,
+      "hash": "3143618757",
+      "phase": "play",
+      "bodyCount": 26
+    },
+    {
+      "node": 19,
+      "frames": 300,
+      "hash": "4118578931",
+      "phase": "play",
+      "bodyCount": 39
+    },
+    {
+      "node": 20,
+      "frames": 300,
+      "hash": "3911518856",
+      "phase": "play",
+      "bodyCount": 27
+    },
+    {
+      "node": 21,
+      "frames": 300,
+      "hash": "1511132955",
+      "phase": "play",
+      "bodyCount": 22
+    },
+    {
+      "node": 22,
+      "frames": 300,
+      "hash": "2519045724",
+      "phase": "play",
+      "bodyCount": 28
+    },
+    {
+      "node": 23,
+      "frames": 300,
+      "hash": "3307971382",
+      "phase": "play",
+      "bodyCount": 13
+    },
+    {
+      "node": 24,
+      "frames": 300,
+      "hash": "2721506953",
+      "phase": "play",
+      "bodyCount": 29
+    },
+    {
+      "node": 25,
+      "frames": 300,
+      "hash": "368362531",
+      "phase": "play",
+      "bodyCount": 24
+    },
+    {
+      "node": 26,
+      "frames": 300,
+      "hash": "3320947548",
+      "phase": "play",
+      "bodyCount": 32
+    },
+    {
+      "node": 27,
+      "frames": 300,
+      "hash": "3548146370",
+      "phase": "play",
+      "bodyCount": 17
+    },
+    {
+      "node": 28,
+      "frames": 300,
+      "hash": "1844292832",
+      "phase": "play",
+      "bodyCount": 30
+    },
+    {
+      "node": 29,
+      "frames": 300,
+      "hash": "2258467261",
+      "phase": "play",
+      "bodyCount": 19
+    },
+    {
+      "node": 30,
+      "frames": 300,
+      "hash": "323063683",
+      "phase": "play",
+      "bodyCount": 24
+    },
+    {
+      "node": 31,
+      "frames": 300,
+      "hash": "1410920098",
+      "phase": "play",
+      "bodyCount": 27
+    },
+    {
+      "node": 32,
+      "frames": 300,
+      "hash": "492044896",
+      "phase": "play",
+      "bodyCount": 13
+    }
+  ]
+}

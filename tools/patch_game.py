@@ -19,12 +19,18 @@ s=s.replace('this.CreatePreloader();','''try { Game.lan = String(this.loaderInfo
             ExternalInterface.addCallback("lanStep", this.lanStep);
             ExternalInterface.addCallback("lanState", this.lanState);
             ExternalInterface.addCallback("lanBatch", this.lanBatch);
+            ExternalInterface.addCallback("lanMenu", this.lanMenu);
             this.addEventListener(Event.ENTER_FRAME,this.lanOnFrame);
          } else { this.CreatePreloader(); }''',1)
 s=s.replace('this.CreateIntroMenu();','if (!Game.lan) this.CreateIntroMenu();')
 s=s.replace('this.MusicChannel.stop();','if (this.MusicChannel != null) this.MusicChannel.stop();')
 for method in ['GameOver','Recuent']:
     s=s.replace('function '+method+'() : *\n      {','function '+method+'() : *\n      {\n         if (Game.lan) return;')
+for method,action in [('LoadMenu','levels'),('LoadInstructions','instructions'),('UnLoadInstructions','intro'),('BackToIntro','intro')]:
+    s=s.replace('function '+method+'(param1:MouseEvent) : *\n      {','function '+method+'(param1:MouseEvent) : *\n      {\n         if (Game.lan) {this.lanRequestMenu("'+action+'",0);return;}')
+s=s.replace('function StartGameBtn(param1:MouseEvent) : *\n      {','function StartGameBtn(param1:MouseEvent) : *\n      {\n         if (Game.lan) {this.lanRequestMenu("level",this.Translation.indexOf(String(param1.target.name).substr(2))+1);return;}')
+s=s.replace('if(this.The_cookie.data.stats[_loc1_] >= 0)','if(Game.lan || this.The_cookie.data.stats[_loc1_] >= 0)')
+s=s.replace('this.The_cookie.data.timesString[_loc1_];','(Game.lan ? "" : this.The_cookie.data.timesString[_loc1_]);')
 # Use a deterministic clock only in LAN mode; ordinary loading retains original behavior.
 s=s.replace('this.m_timer.currentTime = getTimer() - this.m_timer.startTime;','this.m_timer.currentTime = Game.lan ? this.lanFrame * 40 : getTimer() - this.m_timer.startTime;')
 s=s.replace('this.m_timer.addEventListener(Event.ENTER_FRAME,this.TimerUpdate,false,0,true);','if (!Game.lan) this.m_timer.addEventListener(Event.ENTER_FRAME,this.TimerUpdate,false,0,true);')
@@ -41,6 +47,7 @@ bridge=r'''
             if(getTimer()-this.lanPreparedAt<120) return;
             this.GameReady();this.lanBooted=true;this.lanStatus="menu";
          }
+         if (this.lanMenuPending != null) {var menu:Array=this.lanMenuPending;this.lanMenuPending=null;this.lanShowMenu(String(menu[0]),Boolean(menu[1]));}
          if (this.lanPending != null) {
             var probe:Platform1=new Platform1();
             if(probe.bar==null) return;
@@ -57,7 +64,7 @@ bridge=r'''
       public function lanInit() : Object {
          if (!Game.lan) return {ok:false, error:"LAN parameter required"};
          if (!this.lanBooted) return {ok:false,phase:"symbols"};
-         return {ok:true,abi:"rgm141-lan/1",nodes:this.Translation,stepMs:40,physicsDt:0.038461538461538464};
+         return {ok:true,abi:"rgm141-lan/2",nodes:this.Translation,stepMs:40,physicsDt:0.038461538461538464,checkpoints:true,menus:true};
       }
       public function lanStart(node:int, seed:uint) : Object {
          this.lanPending=[node,seed];this.lanStatus="starting";
@@ -91,6 +98,7 @@ bridge=r'''
          if(!this.lanBooted || this.m_level==null) return {ok:false,error:"not started"};
          if(frame!=this.lanFrame+1) return {ok:false,error:"frame gap",frame:this.lanFrame};
          this.lanFrame=frame;
+         fire=this.m_level.lanFilterInput(0,fire);water=this.m_level.lanFilterInput(1,water);
          this.m_level.l_pressed=(fire&1)!=0;this.m_level.r_pressed=(fire&2)!=0;this.m_level.u_pressed=(fire&4)!=0;
          this.m_level.l_pressed2=(water&1)!=0;this.m_level.r_pressed2=(water&2)!=0;this.m_level.u_pressed2=(water&4)!=0;
          Game.lanStepping=true;
@@ -127,20 +135,30 @@ bridge=r'''
          hash=this.lanMix(hash,l.myContactListener.deadFire?1:0);hash=this.lanMix(hash,l.myContactListener.deadWater?1:0);
          hash=this.lanMix(hash,(l.SlidersAndRots.getChildByName("finish1") as MovieClip).currentFrame);
          hash=this.lanMix(hash,(l.SlidersAndRots.getChildByName("finish2") as MovieClip).currentFrame);
+         for(var role:int=0;role<2;role++) {
+            hash=this.lanMix(hash,l.lanRespawns[role]);hash=this.lanMix(hash,l.lanWaitRelease[role]?1:0);hash=this.lanMix(hash,l.lanSafeFrames[role]);hash=this.lanMix(hash,l.lanFlash[role]);hash=this.lanMix(hash,l.lanCheckpointReady[role]?1:0);
+            var history:Array=l.lanHistory[role];for(var j:int=0;j<history.length;j++) for(var k:int=0;k<3;k++) hash=this.lanMix(hash,history[j][k]);
+         }
          var firePos:b2Vec2=l.pers1.GetPosition();var waterPos:b2Vec2=l.pers2.GetPosition();
-         return {ok:true,frame:this.lanFrame,node:this.lanNode,phase:this.lanStatus,hash:String(hash),bodyCount:id,red:l.myContactListener.RedCount,blue:l.myContactListener.BlueCount,green:l.myContactListener.GreenCount,fire:[firePos.x,firePos.y],water:[waterPos.x,waterPos.y],timeMs:this.m_timer.currentTime,rng:String(Game.lanSeed),bodies:detail?bodies:null};
+         return {ok:true,frame:this.lanFrame,node:this.lanNode,phase:this.lanStatus,hash:String(hash),bodyCount:id,red:l.myContactListener.RedCount,blue:l.myContactListener.BlueCount,green:l.myContactListener.GreenCount,fire:[firePos.x,firePos.y],water:[waterPos.x,waterPos.y],timeMs:this.m_timer.currentTime,rng:String(Game.lanSeed),bodies:detail?bodies:null,checkpoints:l.lanCheckpointState(),respawns:l.lanRespawns.concat(),waitRelease:l.lanWaitRelease.concat()};
       }
 '''
+bridge+=(root/'tools/as3/game_menu.as.inc').read_text('utf8')
 pos=s.rfind('\n   }');s=s[:pos]+bridge+s[pos:];(dst/'Game.as').write_text(s,'utf8')
 s=(src/'level.as').read_text('utf8').replace('Math.random()','Game.lanRandom()')
 s=s.replace('_loc11_.userData = new Platform1();','_loc11_.userData = new Platform1();\n         if (Game.lan) _loc11_.userData.gotoAndStop(1);')
 s=s.replace('addEventListener(Event.ENTER_FRAME,this.Update,false,0,true);','if (!Game.lan) addEventListener(Event.ENTER_FRAME,this.Update,false,0,true);')
 s=s.replace('public function Update(param1:Event) : void\n      {','public function Update(param1:Event) : void\n      {\n         if (Game.lan && !Game.lanStepping) return;')
+s=s.replace('if (!Game.lan) addEventListener(Event.ENTER_FRAME,this.Update,false,0,true);','if (!Game.lan) addEventListener(Event.ENTER_FRAME,this.Update,false,0,true);\n         if (Game.lan) this.lanInitCheckpoints();')
+s=s.replace('if(this.myContactListener.deadFire == true && this.pause == false)','if(!Game.lan && this.myContactListener.deadFire == true && this.pause == false)')
+s=s.replace('if(this.myContactListener.deadWater == true && this.pause == false)','if(!Game.lan && this.myContactListener.deadWater == true && this.pause == false)')
+s=s.replace('this.m_world.Step(this.m_timeStep,this.m_iterations);','this.m_world.Step(this.m_timeStep,this.m_iterations);\n            if (Game.lan) this.lanCheckpointAfterPhysics();')
+pos=s.rfind('\n   }');s=s[:pos]+(root/'tools/as3/level_checkpoints.as.inc').read_text('utf8')+s[pos:]
 (dst/'level.as').write_text(s,'utf8')
 for cls in ['deadFire','WaterGirlStairs']:
     s=(src/(cls+'.as')).read_text('utf8')
     s=s.replace('(this.parent.parent as Game).','if (!Game.lan && this.parent != null && this.parent.parent is Game) (this.parent.parent as Game).')
     (dst/(cls+'.as')).write_text(s,'utf8')
 original=(root/'local'/'game.swf').read_bytes()
-(dst/'profile.json').write_text(json.dumps({'id':'rgm141','abi':'rgm141-lan/1','originalSha256':hashlib.sha256(original).hexdigest(),'patchedClasses':['Game','level','deadFire','WaterGirlStairs'],'frameMs':40,'physicsStep':1/26,'rng':'LCG32 1664525,1013904223','requires':['ExternalInterface','same patched SWF and Ruffle runtime'],'totalNodes':32},indent=2),'utf8')
+(dst/'profile.json').write_text(json.dumps({'id':'rgm141','abi':'rgm141-lan/2','originalSha256':hashlib.sha256(original).hexdigest(),'patchedClasses':['Game','level','deadFire','WaterGirlStairs'],'frameMs':40,'physicsStep':1/26,'rng':'LCG32 1664525,1013904223','requires':['ExternalInterface','same patched SWF and Ruffle runtime'],'totalNodes':32,'menus':'original intro, instructions, level map; host/P1 only','checkpoints':{'stableFrames':6,'historyLimit':24,'ground':'static terrain with full-foot support and hazard clearance','respawn':'per actor; preserve world; neutral input required after respawn'}},indent=2),'utf8')
 print(dst)

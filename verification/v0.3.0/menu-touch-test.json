@@ -1,0 +1,17 @@
+{
+  "date": "2026-10-26T01:07:24.245Z",
+  "environment": "Edge mobile/touch emulation, 844x390; not a physical Android test",
+  "player1Role": "water",
+  "nativeMenuTap": true,
+  "independentTouchMasks": [
+    2,
+    6,
+    2,
+    0,
+    1,
+    0
+  ],
+  "realMovement": true,
+  "returnToTitle": true,
+  "errors": []
+}

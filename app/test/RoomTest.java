@@ -9,6 +9,10 @@ public class RoomTest {
   String g=w.action(new JSONObject().put("op","join").put("name","Guest").put("room",w.room).put("invite",w.invite).put("requestId","guest")).getString("token");
   w.connect(h,"h");w.connect(g,"g");action(w,g,"ready");action(w,h,"start");long now=System.currentTimeMillis();w.tick(now);check(w.frame==0,"loading barrier");
   w.input(h,"h",packet("engine",w));w.input(g,"g",packet("engine",w));
+  w.tick(now);check(w.frame==0&&w.node==0&&w.menuView.equals("intro"),"room opens native menu without advancing physics");
+  boolean forbidden=false;try{w.action(new JSONObject().put("token",g).put("op","menu").put("view","level").put("node",1).put("requestId","guest-menu"));}catch(IllegalArgumentException e){forbidden=true;}check(forbidden&&w.node==0,"P2 cannot control native menus");
+  w.action(new JSONObject().put("token",h).put("op","menu").put("view","instructions").put("requestId","instructions"));check(w.menuView.equals("instructions"),"P1 instructions");
+  w.action(new JSONObject().put("token",h).put("op","menu").put("view","level").put("node",1).put("requestId","choose-level"));w.input(h,"h",packet("engine",w));w.input(g,"g",packet("engine",w));
   w.input(h,"h",packet("input",w).put("mask",2).put("seq",1));w.input(g,"g",packet("input",w).put("mask",4).put("seq",1));w.tick(now);check(w.frame==1,"fixed tick");
   JSONArray row=w.replay(h,0,w.epoch).getJSONArray("commands").getJSONArray(0);check(row.getInt(1)==2&&row.getInt(2)==4,"role inputs");
   w.input(h,"h",packet("input",w).put("mask",1).put("seq",0));check(w.seats[0].mask==2,"stale sequence rejected");
@@ -19,6 +23,9 @@ public class RoomTest {
   w.input(h,"h",packet("engine",w).put("resync",0));check(w.seats[0].loaded==-1,"stale generation ignored");
   int oldEpoch=w.epoch;action(w,h,"reload");check(w.epoch==oldEpoch+1&&w.frame==0&&w.journal.isEmpty(),"new level clears journal");
   boolean rejected=false;try{w.replay(g,0,oldEpoch);}catch(IllegalArgumentException e){rejected=true;}check(rejected,"stale replay rejected");
-  System.out.println("PASS: input roles, sequence, leases, load barrier, replay, disconnect, desync generation, reload");
+  w.input(h,"h",packet("input",w).put("epoch",oldEpoch).put("mask",2).put("seq",9999));check(w.seats[0].mask==0,"stale level input ignored");
+  w.action(new JSONObject().put("token",h).put("op","menu").put("view","intro").put("requestId","back-to-title"));check(w.node==0&&w.frame==0&&w.journal.isEmpty(),"return to native title resets level journal");
+  RoomWorld alternate=new RoomWorld();alternate.action(new JSONObject().put("token",alternate.hostToken).put("op","create").put("role",1).put("solo",true).put("requestId","water-host"));alternate.connect(alternate.hostToken,"water");action(alternate,alternate.hostToken,"start");alternate.action(new JSONObject().put("token",alternate.hostToken).put("op","menu").put("view","levels").put("requestId","water-menu"));check(alternate.seats[0].role==1&&alternate.menuView.equals("levels"),"menu ownership follows seat P1, not fire/water role");
+  System.out.println("PASS: P1 menu authority, menu idle, input roles/epoch/sequence/leases, replay, reconnect, desync and level return");
  }
 }

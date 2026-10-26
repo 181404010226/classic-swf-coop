@@ -1,0 +1,20 @@
+const{chromium}=require('playwright'),assert=require('node:assert/strict'),fs=require('fs'),path=require('path');
+let debugPage;const host=process.env.CLASSIC_HOST,url=process.env.CLASSIC_URL||'http://127.0.0.1:17684';if(!host)throw Error('Set CLASSIC_HOST');
+(async()=>{const browser=await chromium.launch({executablePath:'C:/Program Files (x86)/Microsoft/Edge/Application/msedge.exe',headless:true}),ctx=await browser.newContext({viewport:{width:844,height:390},hasTouch:true,isMobile:true}),p=await ctx.newPage(),errors=[];p.on('pageerror',e=>errors.push(e.message));
+ debugPage=p;await p.request.post(url+'/api/action',{headers:{'X-Seat-Token':host},data:{op:'close',requestId:'touch-reset-'+Date.now()}});await p.goto(url+'/#host='+host);await p.click('[data-role="1"]');await p.click('[data-do="solo"]');await p.waitForFunction(()=>state?.players[0]?.connected);await p.click('[data-op="start"]');await p.waitForFunction(()=>engineStarted&&!state.paused&&window.localGameState?.phase==='intro',null,{timeout:30000});assert.equal(await p.evaluate(()=>state.role),1);
+ await p.screenshot({path:path.resolve(__dirname,'../build/native-mobile-menu.png')});
+ async function tap(x,y){const r=await p.locator('#engine').boundingBox();await p.touchscreen.tap(r.x+x*r.width/640,r.y+y*r.height/480);}
+ await tap(320,253);await p.waitForFunction(()=>window.localGameState?.phase==='levels');await tap(310,452);await p.waitForFunction(()=>state.node===1&&window.localGameState?.frame>10&&!state.paused,null,{timeout:30000});
+ const point=async(selector,id)=>{const r=await p.locator(selector).boundingBox();return{x:r.x+r.width/2,y:r.y+r.height/2,id};};
+ const right=await point('[data-control="right"]',1),jump=await point('[data-control="up"]',2),left=await point('[data-control="left"]',3),cdp=await ctx.newCDPSession(p);const before=await p.evaluate(()=>window.localGameState.water[0]);
+ await p.evaluate(()=>{window.touchTrace=[];for(const type of ['pointerdown','pointerup','pointercancel','lostpointercapture'])document.addEventListener(type,e=>touchTrace.push({type,id:e.pointerId,control:e.target.dataset?.control,held}),true);});
+ await cdp.send('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:[right]});await p.waitForFunction(()=>held===2);await p.waitForTimeout(160);
+ await cdp.send('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:[right,jump]});await p.waitForFunction(()=>held===6);await p.waitForTimeout(120);
+ // This Edge runtime releases the explicitly ended point; verify the emitted
+ // pointerup/lostpointercapture rather than assuming every finger was lifted.
+ await cdp.send('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:[jump]});await p.waitForFunction(()=>held===2,null,{timeout:3000});await p.waitForTimeout(120);
+ await cdp.send('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:[]});await p.waitForFunction(()=>held===0);assert.ok(await p.evaluate(()=>window.localGameState.water[0])>before+.2,'touch moves P1 water after using original menu');
+ await cdp.send('Input.dispatchTouchEvent',{type:'touchStart',touchPoints:[left]});await p.waitForFunction(()=>held===1);await p.waitForTimeout(120);await cdp.send('Input.dispatchTouchEvent',{type:'touchEnd',touchPoints:[]});await p.waitForFunction(()=>held===0);
+ await p.click('#menu');await p.click('#menu-original');await p.waitForFunction(()=>state.node===0&&window.localGameState?.phase==='intro'&&!state.paused);assert.deepEqual(errors,[]);
+ fs.writeFileSync(path.resolve(__dirname,'../build/menu-touch-test.json'),JSON.stringify({date:new Date().toISOString(),environment:'Edge mobile/touch emulation, 844x390; not a physical Android test',player1Role:'water',nativeMenuTap:true,independentTouchMasks:[2,6,2,0,1,0],realMovement:true,returnToTitle:true,errors},null,2));console.log('PASS: P1 water controls original menu by touch; move+jump/release/reverse and native-menu return');await browser.close();
+})().catch(async e=>{console.error(e);if(debugPage)console.log('TOUCH STATE',await debugPage.evaluate(()=>({held,pointers:[...pointers],phase:state?.phase,node:state?.node,paused:state?.paused})).catch(String));process.exit(1)});

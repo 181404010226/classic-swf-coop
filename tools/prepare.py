@@ -14,7 +14,7 @@ def fetch(cache,name):
  if target.exists() and sha(target)==digest:return target
  for attempt in range(3):
   try:
-   request=urllib.request.Request(url,headers={'User-Agent':'classic-swf-coop/0.2.0'})
+   request=urllib.request.Request(url,headers={'User-Agent':'classic-swf-coop/0.3.0'})
    with urllib.request.urlopen(request,timeout=90) as response:data=response.read()
    if hashlib.sha256(data).hexdigest()!=digest:raise ValueError('Dependency hash mismatch: '+name)
    target.write_bytes(data);return target

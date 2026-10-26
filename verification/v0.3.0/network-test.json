@@ -1,0 +1,68 @@
+{
+  "date": "2026-10-26T00:59:52.853Z",
+  "transport": "WebSocket ordered inputs, no video",
+  "nativeMenu": {
+    "intro": true,
+    "instructions": true,
+    "levels": true,
+    "returnToTitle": true,
+    "player2ClickBlocked": true,
+    "player2ApiRejected": true
+  },
+  "sameState": {
+    "blue": 0,
+    "bodies": null,
+    "bodyCount": 20,
+    "checkpoints": [
+      [
+        4.537639403706841,
+        26.703452303703514,
+        132,
+        true
+      ],
+      [
+        2.4672225852296883,
+        22.705000000332,
+        133,
+        true
+      ]
+    ],
+    "fire": [
+      4.537639403706841,
+      26.703452303703514
+    ],
+    "frame": 135,
+    "green": 0,
+    "hash": "1029020999",
+    "node": 1,
+    "ok": true,
+    "phase": "play",
+    "red": 0,
+    "respawns": [
+      0,
+      0
+    ],
+    "rng": "1733485461",
+    "timeMs": 5400,
+    "waitRelease": [
+      false,
+      false
+    ],
+    "water": [
+      2.7852560184039756,
+      22.700281177480893
+    ]
+  },
+  "reconnectReplay": true,
+  "levelSwitch": 7,
+  "desyncRecovery": true,
+  "soakFrames": 750,
+  "latency": {
+    "metric": "DOM keydown to ordered input frame applied by local SWF; loopback PC; excludes display scanout and touch hardware",
+    "samples": 24,
+    "p50": 27.599999994039536,
+    "p95": 45.80000001192093,
+    "max": 46
+  },
+  "errors": []
+}

@@ -1,0 +1,290 @@
+{
+  "date": "2026-10-26T00:52:00.865Z",
+  "frames": 254,
+  "events": [
+    {
+      "kind": "grounded",
+      "state": {
+        "blue": 0,
+        "bodies": null,
+        "bodyCount": 20,
+        "checkpoints": [
+          [
+            2,
+            26.70552890504608,
+            6,
+            true
+          ],
+          [
+            2,
+            22.70552890504608,
+            6,
+            true
+          ]
+        ],
+        "fire": [
+          2,
+          26.70507098843361
+        ],
+        "frame": 30,
+        "green": 0,
+        "hash": "120752419",
+        "node": 1,
+        "ok": true,
+        "phase": "play",
+        "red": 0,
+        "respawns": [
+          0,
+          0
+        ],
+        "rng": "1204432115",
+        "timeMs": 1200,
+        "waitRelease": [
+          false,
+          false
+        ],
+        "water": [
+          2,
+          22.70507098843361
+        ]
+      }
+    },
+    {
+      "kind": "gem-before-death",
+      "state": {
+        "blue": 0,
+        "bodies": null,
+        "bodyCount": 20,
+        "checkpoints": [
+          [
+            17.19057237597467,
+            26.70500079440561,
+            91,
+            true
+          ],
+          [
+            2,
+            22.70552890504608,
+            6,
+            true
+          ]
+        ],
+        "fire": [
+          20.121243757678034,
+          27.20508616705626
+        ],
+        "frame": 102,
+        "green": 0,
+        "hash": "2323578571",
+        "node": 1,
+        "ok": true,
+        "phase": "play",
+        "red": 1,
+        "respawns": [
+          0,
+          0
+        ],
+        "rng": "1204432115",
+        "timeMs": 4080,
+        "waitRelease": [
+          false,
+          false
+        ],
+        "water": [
+          2,
+          22.70507098843361
+        ]
+      }
+    },
+    {
+      "kind": "water-respawn",
+      "state": {
+        "blue": 0,
+        "bodies": null,
+        "bodyCount": 20,
+        "checkpoints": [
+          [
+            20.472182995366758,
+            27.2050441175328,
+            105,
+            true
+          ],
+          [
+            11.675456813015813,
+            22.70506890370276,
+            143,
+            true
+          ]
+        ],
+        "fire": [
+          20.512749059705683,
+          27.2050111717161
+        ],
+        "frame": 168,
+        "green": 0,
+        "hash": "2547889304",
+        "node": 1,
+        "ok": true,
+        "phase": "play",
+        "red": 1,
+        "respawns": [
+          0,
+          1
+        ],
+        "rng": "1204432115",
+        "timeMs": 6720,
+        "waitRelease": [
+          false,
+          true
+        ],
+        "water": [
+          11.675456813015813,
+          22.64506890370276
+        ]
+      }
+    },
+    {
+      "kind": "held-input-stopped",
+      "state": {
+        "blue": 0,
+        "bodies": null,
+        "bodyCount": 20,
+        "checkpoints": [
+          [
+            20.472182995366758,
+            27.2050441175328,
+            105,
+            true
+          ],
+          [
+            11.675456813015813,
+            22.70506890370276,
+            143,
+            true
+          ]
+        ],
+        "fire": [
+          20.512749059705683,
+          27.2050111717161
+        ],
+        "frame": 193,
+        "green": 0,
+        "hash": "3102045479",
+        "node": 1,
+        "ok": true,
+        "phase": "play",
+        "red": 1,
+        "respawns": [
+          0,
+          1
+        ],
+        "rng": "1204432115",
+        "timeMs": 7720,
+        "waitRelease": [
+          false,
+          true
+        ],
+        "water": [
+          11.675456813015813,
+          22.705007527976843
+        ]
+      }
+    },
+    {
+      "kind": "water-can-move-again",
+      "state": {
+        "blue": 0,
+        "bodies": null,
+        "bodyCount": 20,
+        "checkpoints": [
+          [
+            20.472182995366758,
+            27.2050441175328,
+            105,
+            true
+          ],
+          [
+            11.675456813015813,
+            22.70506890370276,
+            143,
+            true
+          ]
+        ],
+        "fire": [
+          20.512749059705683,
+          27.2050111717161
+        ],
+        "frame": 202,
+        "green": 0,
+        "hash": "1717149492",
+        "node": 1,
+        "ok": true,
+        "phase": "play",
+        "red": 1,
+        "respawns": [
+          0,
+          1
+        ],
+        "rng": "1204432115",
+        "timeMs": 8080,
+        "waitRelease": [
+          false,
+          false
+        ],
+        "water": [
+          10.917120088385419,
+          22.705063859173737
+        ]
+      }
+    },
+    {
+      "kind": "fire-respawn",
+      "state": {
+        "blue": 0,
+        "bodies": null,
+        "bodyCount": 20,
+        "checkpoints": [
+          [
+            21.313702062956576,
+            27.20500187430294,
+            210,
+            true
+          ],
+          [
+            10.726990463313221,
+            22.705032695896953,
+            205,
+            true
+          ]
+        ],
+        "fire": [
+          21.313702062956576,
+          27.14500187430294
+        ],
+        "frame": 233,
+        "green": 0,
+        "hash": "1726610505",
+        "node": 1,
+        "ok": true,
+        "phase": "play",
+        "red": 1,
+        "respawns": [
+          1,
+          1
+        ],
+        "rng": "1204432115",
+        "timeMs": 9320,
+        "waitRelease": [
+          true,
+          false
+        ],
+        "water": [
+          10.71713470083585,
+          22.7050011503846
+        ]
+      }
+    }
+  ],
+  "replayIdentical": true,
+  "errors": []
+}

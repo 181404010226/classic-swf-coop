@@ -1,0 +1,39 @@
+{
+  "originalSha256": "b971248765587523e63e5264a2e9d00db3e595d9866b2d8c15a403d7dee2aa6b",
+  "patchedSha256": "3ba64b8f71c49b5bb467229aca4750b5ee2480a04e24edb34c39ae1d36499d2d",
+  "originalTagCount": 991,
+  "preservedNonAbcTags": 987,
+  "allNonAbcTagBytesIdentical": false,
+  "buttonIdRepairs": [
+    {
+      "index": 425,
+      "type": 34,
+      "oldId": 0,
+      "newId": 381,
+      "changedBytes": "character ID only; button records and art unchanged"
+    },
+    {
+      "index": 429,
+      "type": 34,
+      "oldId": 0,
+      "newId": 384,
+      "changedBytes": "character ID only; button records and art unchanged"
+    },
+    {
+      "index": 434,
+      "type": 34,
+      "oldId": 0,
+      "newId": 388,
+      "changedBytes": "character ID only; button records and art unchanged"
+    }
+  ],
+  "allOtherNonAbcTagsByteIdentical": true,
+  "ffdecReserializedChanges": [
+    {
+      "index": 96,
+      "type": 82,
+      "old": 253667,
+      "new": 285544
+    }
+  ]
+}

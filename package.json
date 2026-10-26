@@ -1,6 +1,6 @@
 {
   "name": "classic-swf-coop",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "private": true,
   "description": "Local simulation co-op shell and reproducible SWF adapter tooling",
   "devDependencies": {
@@ -10,6 +10,8 @@
     "lab": "node tools/lab.cjs",
     "test:network": "node app/test/network.test.cjs",
     "test:determinism": "node tools/test_determinism.cjs",
-    "test:startup": "node tools/test_startup.cjs"
+    "test:startup": "node tools/test_startup.cjs",
+    "test:checkpoints": "node tools/test_checkpoints.cjs",
+    "test:touch": "node app/test/menu-touch.test.cjs"
   }
 }

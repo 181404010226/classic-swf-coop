@@ -1,0 +1,19 @@
+{
+  "version": "0.3.0",
+  "date": "2026-10-26T09:09:01.394229+08:00",
+  "abi": "rgm141-lan/2",
+  "patchedSwfSha256": "3ba64b8f71c49b5bb467229aca4750b5ee2480a04e24edb34c39ae1d36499d2d",
+  "menuAuthority": "host seat / player1, independent of chosen character",
+  "checkpoints": "independent per actor; stable safe ground; preserve partner, gems and mechanisms; release inputs after respawn",
+  "physicalPhoneTestedThisVersion": false,
+  "files": {
+    "classic-swf-coop-v0.3.0-windows.zip": {
+      "bytes": 12163336,
+      "sha256": "899e30dd926e44a5116a6e271056efdfdb5ea326d1a59306b16e7894facb202d"
+    },
+    "classic-swf-coop-v0.3.0-android.apk": {
+      "bytes": 12256790,
+      "sha256": "7bde555555d7c73fd0c09ca93120550a217fa32f155862b2f67cde56bbf66baa"
+    }
+  }
+}
